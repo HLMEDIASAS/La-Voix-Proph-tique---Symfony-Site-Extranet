@@ -1,0 +1,11 @@
+biynlvp_homepage:
+    path:     /
+    defaults: { _controller: biynlvpBundle:Default:index }
+    
+biynlvp_espacemembres:
+    path:     /membre/
+    defaults: { _controller: biynlvpBundle:Membre:accueil }
+    
+biynlvp_connexion:
+    path:     /membre/connexion
+    defaults: { _controller: biynlvpBundle:Membre:connexion }

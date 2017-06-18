@@ -1,0 +1,185 @@
+{% extends "biynlvpBundle::site.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block biynlvp_body %}
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">{{ nomdusite }}</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            {{ render(controller("biynlvpBundle:Default:menu")) }}
+            
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <!--<img src="{{ asset('bundles/biynlvp/img/logo.png') }}" alt="Logo la Voix Prophétique">-->
+                <h1 id="homeHeading">Ministère la Voix Prophétique</h1>
+                <hr>
+                <p>La Voix Prophétique est née de la vision que le seigneur a révélé à son prophéte Jérémia qui est aussi le fondateur de l’Eglise Centre Liberté.</p>
+                <a href="#presentation" class="btn btn-primary btn-xl page-scroll">En savoir plus</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="presentation">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Présentation</h2>
+                    <hr class="light">
+                    <p class="text-faded">La Voix Prophétique est une oeuvre de révélation du mouvement prophétique de ces derniers temps. L’ école prophétique nous enseigne la voix de l’ esprit, nous entraine dans le courant prophétique et nous permet d’entrer pleinement dans la révélation d’un coeur nouveau : la louange, l’adoration prophétique de la parole révélée (réma).</p>
+                    <p class="text-faded">Le retour du seigneur est imminant, nous devons nous tenir dans l’obeissance à la voix de l’Esprit de Dieu afin d’être formé, transformé et de porter la révélation de la vie de l’Esprit dans les nations.</p>
+                    <p class="text-faded"><em>« Heureux le peuple qui connaît le son de la trompette ;<br>Il marche à la clarté de ta face, ô Eternel! » Psaume 89v16</em></p>
+                    <p class="text-faded">Nous croyons, que le seigneur nous appelle, rejoignez-nous dans cette voie.</p>
+                    <a href="#inscription" class="page-scroll btn btn-default btn-xl sr-button">Conditions d'inscription</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="inscription">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Conditions d'inscription</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heartbeat text-primary sr-icons"></i>
+                        <h3>Être né de nouveau</h3>
+                        <p class="text-muted">Baptème par immersion selon la parole de Dieu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding" id="galerie">
+        <div class="container-fluid">
+            <div class="row no-gutter popup-gallery">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/3.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/3.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Eglise Centre Liberté
+                                </div>
+                                <div class="project-name">
+                                    Eglise Centre Liberté : Martinique
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/2.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/2.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Eglise Centre Liberté
+                                </div>
+                                <div class="project-name">
+                                    Eglise Centre Liberté : Paris
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/4.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/4.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Eglise Centre Liberté
+                                </div>
+                                <div class="project-name">
+                                    Eglise Centre Liberté : Guadeloupe
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/1.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/1.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Eglise Centre Liberté
+                                </div>
+                                <div class="project-name">
+                                    Eglise Centre Liberté : Martinique
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/7.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/7.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    La Voix Prophétique
+                                </div>
+                                <div class="project-name">
+                                    La Voix Prophétique : Pendant un cours
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="{{ asset('bundles/biynlvp/img/portfolio/fullsize/8.jpg') }}" class="portfolio-box">
+                        <img src="{{ asset('bundles/biynlvp/img/portfolio/fullsize/8.jpg') }}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    La Voix Prophétique
+                                </div>
+                                <div class="project-name">
+                                    La Voix Prophétique : Apôtre Jérémia
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Télécharger notre Dépliant</h2>
+                <a target="_blank" href="{{ asset('bundles/biynlvp/pdf/DepliantVP2017.pdf') }}" class="btn btn-default btn-xl sr-button"><i class="fa fa-download" aria-hidden="true"></i> Télécharger le PDF</a>
+            </div>
+        </div>
+    </aside>
+
+    {{ include("biynlvpBundle:Default:contact.html.twig") }}
+
+{% endblock %}

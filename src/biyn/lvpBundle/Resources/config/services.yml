@@ -1,0 +1,4 @@
+services:
+#    biynlvp.example:
+#        class: biyn\lvpBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

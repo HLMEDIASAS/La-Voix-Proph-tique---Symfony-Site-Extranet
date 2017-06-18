@@ -1,0 +1,3 @@
+biynlvp:
+    resource: "@biynlvpBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,55 @@
+{% extends "biynlvpBundle::extranet.html.twig" %}
+
+{% block title %}
+    Espace Membres - {{ parent() }}
+{% endblock %}
+
+{% block biynlvp_body %}
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <!--<img src="{{ asset('bundles/biynlvp/img/logo.png') }}" alt="Logo la Voix Prophétique">-->
+                <h1 id="homeHeading">Espace Membres</h1>
+                <hr>
+                <p>
+                    Bienvenue sur l'Espace Membre de la Voix Prophétique <br>
+                    A partir de cet espace vous pouvez réécouter les cours.
+                </p>
+                <a href="#lescours" class="btn btn-primary btn-xl page-scroll"><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Voir les cours</a>
+            </div>
+        </div>
+    </header>
+    <!--<pre>
+        {{dump(cours)}}
+    </pre>-->
+    <section class="bg-primary" id="lescours">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Les Cours</h2>
+                    <hr class="light">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Titre du Cours</th>
+                                <th>Lecteur Audio</th>
+                                <th>Résumé en PDF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cour in cours %}
+                            <tr>
+                                <td>{{cour.id}}</td>
+                                <td>{{cour.titre}}</td>
+                                <td>{{cour.mp3}}</td>
+                                <td>{{cour.pdf}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
