@@ -1,0 +1,21 @@
+{% extends "biynlvpBundle::extranet.html.twig" %}
+
+{% block title %}
+    Inscription - {{ parent() }}
+{% endblock %}
+
+{% block biynlvp_body %}
+<header>
+        <div class="header-content">
+            <div class="header-content-inner">
+               <div class="row">
+                 <div class="col-xs-6 col-xs-push-3">
+                     <h2>Inscrire un nouveau membre</h2>
+                     {{ form(form) }}
+                     Mot de passe généré : {{membre.mdp}}
+                 </div>
+               </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

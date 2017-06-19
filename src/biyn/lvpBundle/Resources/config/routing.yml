@@ -2,6 +2,8 @@ biynlvp_homepage:
     path:     /
     defaults: { _controller: biynlvpBundle:Default:index }
     
+# ROUTE MEMBRES
+
 biynlvp_espacemembres:
     path:     /membre/
     defaults: { _controller: biynlvpBundle:Membre:accueil }
@@ -9,3 +11,13 @@ biynlvp_espacemembres:
 biynlvp_connexion:
     path:     /membre/connexion
     defaults: { _controller: biynlvpBundle:Membre:connexion }
+    
+biynlvp_inscription:
+    path:     /membre/inscription
+    defaults: { _controller: biynlvpBundle:Membre:inscription }
+
+# ROUTE ADMINISTRATION
+
+biynlvp_admin_membres:
+    path:     /admin/membres
+    defaults: { _controller: biynlvpBundle:Admin:membres }

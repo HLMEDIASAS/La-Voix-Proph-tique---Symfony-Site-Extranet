@@ -71,6 +71,16 @@ class Membres
     private $isadmin;
 
 
+    public function __construct() {
+        
+        # Quelques valeurs par défaut
+        $this->isadmin = false;
+        $this->isactive = true;
+        $this->dateinscription = new \DateTime();
+        $this->mdp = bin2hex(random_bytes(4));
+    }
+    
+    
     /**
      * Get id
      *
