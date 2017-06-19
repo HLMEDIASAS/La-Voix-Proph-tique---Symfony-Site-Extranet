@@ -18,6 +18,7 @@ class AppKernel extends Kernel
 
             # Chargement du Kernel de LVP
             new biyn\lvpBundle\biynlvpBundle(),
+            new biyn\MembreBundle\biynMembreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

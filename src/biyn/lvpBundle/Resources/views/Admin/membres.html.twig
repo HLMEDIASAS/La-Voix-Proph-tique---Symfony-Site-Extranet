@@ -41,9 +41,12 @@
                                 <td>{{membre.email}}</td>
                                 <td>{{membre.dateinscription|date("d/m/Y")}}</td>
                                 <td>{% if membre.isactive %} Actif {% else %} Suspendu {% endif %}</td>
-                                <td>{% if membre.isadmin %} Administrateur {% else %} Membre {% endif %}</td>
+                                <td>{% if 'ROLE_ADMIN' in membre.roles %} Administrateur {% else %} Membre {% endif %}</td>
                             </tr>
                             {% endfor %}
+                            <!--<pre>
+                                {{dump(membres)}}
+                            </pre>-->
                         </tbody>
                     </table>
                 </div>

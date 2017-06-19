@@ -10,6 +10,7 @@
             <div class="header-content-inner">
                 <!--<img src="{{ asset('bundles/biynlvp/img/logo.png') }}" alt="Logo la Voix Prophétique">-->
                 <h1 id="homeHeading">Espace Membres</h1>
+                <h3>Bonjour {{app.user.prenom}} !</h3>
                 <hr>
                 <p>
                     Bienvenue sur l'Espace Membre de la Voix Prophétique <br>
@@ -20,7 +21,7 @@
         </div>
     </header>
     <!--<pre>
-        {{dump(cours)}}
+        {{dump(app.user)}}
     </pre>-->
     <section class="bg-primary" id="lescours">
         <div class="container">

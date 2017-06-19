@@ -1,16 +1,24 @@
 <?php
 
+# : DOCS
+# : https://symfony.com/doc/current/security/entity_provider.html
+
 namespace biyn\lvpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; 
+// use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * Membres
  *
  * @ORM\Table(name="membres")
+ * @UniqueEntity(fields="email", message="Un membre existe déjà avec cet email.")
  * @ORM\Entity(repositoryClass="biyn\lvpBundle\Repository\MembresRepository")
  */
-class Membres
+class Membres implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var int
@@ -25,6 +33,7 @@ class Membres
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=50)
+     * @Assert\Length(max=50, maxMessage="Le prenom doit faire au maximum {{ limit }} caractères.")
      */
     private $prenom;
 
@@ -32,6 +41,7 @@ class Membres
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=50)
+     * @Assert\Length(max=50, maxMessage="Le nom doit faire au maximum {{ limit }} caractères.")
      */
     private $nom;
 
@@ -39,6 +49,11 @@ class Membres
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50, unique=true)
+     * @Assert\Length(max=50, maxMessage="L'email doit faire au maximum {{ limit }} caractères.")
+     * @Assert\Email(
+     *     message = "L'adresse '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -53,6 +68,7 @@ class Membres
      * @var \DateTime
      *
      * @ORM\Column(name="dateinscription", type="datetime")
+     * @Assert\DateTime()
      */
     private $dateinscription;
 
@@ -62,24 +78,24 @@ class Membres
      * @ORM\Column(name="isactive", type="boolean")
      */
     private $isactive;
-
+    
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="isadmin", type="boolean")
+     * @ORM\Column(name="salt", type="string", length=255)
      */
-    private $isadmin;
-
+    private $salt;
+    
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles;
 
     public function __construct() {
         
-        # Quelques valeurs par d�faut
-        $this->isadmin = false;
+        # Quelques valeurs par défaut
         $this->isactive = true;
         $this->dateinscription = new \DateTime();
         $this->mdp = bin2hex(random_bytes(4));
     }
-    
     
     /**
      * Get id
@@ -236,27 +252,143 @@ class Membres
     }
 
     /**
-     * Set isadmin
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getRoles()
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getPassword()
+     */
+    public function getPassword()
+    {
+        // TODO Auto-generated method stub
+        return $this->mdp;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getSalt()
+     */
+    public function getSalt()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::getUsername()
+     */
+    public function getUsername()
+    {
+        // TODO Auto-generated method stub
+        return $this->email;
+    }
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
+     */
+    public function eraseCredentials()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->mdp,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->mdp,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+
+    /**
+     * Set salt
      *
-     * @param boolean $isadmin
+     * @param string $salt
      *
      * @return Membres
      */
-    public function setIsadmin($isadmin)
+    public function setSalt($salt)
     {
-        $this->isadmin = $isadmin;
+        $this->salt = $salt;
 
         return $this;
     }
 
     /**
-     * Get isadmin
+     * Set roles
      *
-     * @return bool
+     * @param array $roles
+     *
+     * @return Membres
      */
-    public function getIsadmin()
+    public function setRoles($roles)
     {
-        return $this->isadmin;
-    }
-}
+        $this->roles[] = $roles;
 
+        return $this;
+    }
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonExpired()
+     */
+    public function isAccountNonExpired()
+    {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isAccountNonLocked()
+     */
+    public function isAccountNonLocked()
+    {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isCredentialsNonExpired()
+     */
+    public function isCredentialsNonExpired()
+    {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Security\Core\User\AdvancedUserInterface::isEnabled()
+     */
+    public function isEnabled()
+    {
+        // TODO Auto-generated method stub
+        return $this->isactive;
+    }
+
+}

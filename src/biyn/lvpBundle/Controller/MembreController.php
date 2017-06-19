@@ -4,64 +4,48 @@ namespace biyn\lvpBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use biyn\lvpBundle\Entity\Membres;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use biyn\lvpBundle\Form\MembresType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class MembreController extends Controller
 {
+    
+    /**
+     * @Security("has_role('ROLE_MEMBRE')")
+     */
     public function accueilAction()
     {
-        # Récupération du Repository
+        # RÃ©cupÃ©ration du Repository
         $coursRepository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('biynlvpBundle:Cours');
         
+        # RÃ©cupÃ©ration des cours
         $cours = $coursRepository->findAll();        
         
+        # Envoi des informations Ã  la vue
         return $this->render('biynlvpBundle:Membre:accueil.html.twig', ['cours' => $cours]);
     }
     
-    public function connexionAction()
-    {
-        return $this->render('biynlvpBundle:Membre:connexion.html.twig');
-    }
-    
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function inscriptionAction(Request $request)
     {
-        # Création d'un Objet Membre
+        # CrÃ©ation d'un Objet Membre
         $membre = new Membres();
         
-        # Création du Formulaire pour l'inscription
-        $form = $this->createFormBuilder($membre)
-                     ->add('prenom', TextType::class, [
-                         'required'   => true,
-                         'empty_data' => 'Prénom...',
-                     ])
-                     ->add('nom', TextType::class, [
-                         'required'   => true,
-                         'empty_data' => 'Nom...',
-                     ])
-                     ->add('email', EmailType::class, [
-                         'required'   => true,
-                         'empty_data' => 'Email...',
-                     ])
-                     ->add('isadmin', CheckboxType::class, [
-                         'label' => 'Administrateur ?',
-                         'required' => false
-                     ])
-                     ->add('submit', SubmitType::class, ['label' => 'Inscrire ce membre'])
-                     ->getForm();
+        # CrÃ©ation du Formulaire pour l'inscription
+        $form = $this->createForm(MembresType::class);
          
-         # Traitement de la Requète
+         # Traitement de la RequÃ¨te
          $form->handleRequest($request);
          
          # Traitement POST
          if ($form->isSubmitted() && $form->isValid()) :
              
-             # Récupération du Membre
+             # RÃ©cupÃ©ration du Membre
              $data = $form->getData();
          
              # Enregistrement en BDD
@@ -69,27 +53,17 @@ class MembreController extends Controller
              $em->persist($data);
              $em->flush();
              
-             $request->getSession()->getFlashBag()->add('notice', 'Membre bien ajouté.');
+             //$request->getSession()->getFlashBag()->add('notice', 'Membre bien ajoutÃ©.');
              
-             // On redirige vers la page de visualisation de l'annonce nouvellement créée         
+             # Redirection vers la Page de Gestion des Membres      
              return $this->redirectToRoute('biynlvp_admin_membres');
              
          endif;
         
-        # Passage à la Vue
+        # Passage Ã  la Vue
         return $this->render('biynlvpBundle:Membre:inscription.html.twig', 
-                        ['form' => $form->createView(), 'membre' => $membre]);
+                        ['form' => $form->createView()]);
         
     }
     
 }
-
-
-
-
-
-
-
-
-
-

@@ -34,8 +34,6 @@ class DefaultController extends Controller
         $menu = [
             ['titre' => '< Vers le site', 'url' => $this->generateUrl('biynlvp_homepage')],
             ['titre' => 'Espace Membres', 'url' => $this->generateUrl('biynlvp_espacemembres')],
-            ['titre' => 'Connexion', 'url' => $this->generateUrl('biynlvp_connexion')],
-            ['titre' => 'Inscription', 'url' => $this->generateUrl('biynlvp_inscription')],
         ];
 
         # Envoi à la Vue

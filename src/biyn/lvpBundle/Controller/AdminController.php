@@ -10,12 +10,16 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\BrowserKit\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdminController extends Controller
 {
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function membresAction()
     {
-        # Récupération du Repository
+        # RÃ©cupÃ©ration du Repository
         $membresRepository = $this->getDoctrine()
                    ->getManager()
                    ->getRepository('biynlvpBundle:Membres');

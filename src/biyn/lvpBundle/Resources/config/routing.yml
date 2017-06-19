@@ -7,17 +7,25 @@ biynlvp_homepage:
 biynlvp_espacemembres:
     path:     /membre/
     defaults: { _controller: biynlvpBundle:Membre:accueil }
-    
-biynlvp_connexion:
-    path:     /membre/connexion
-    defaults: { _controller: biynlvpBundle:Membre:connexion }
-    
-biynlvp_inscription:
-    path:     /membre/inscription
-    defaults: { _controller: biynlvpBundle:Membre:inscription }
 
 # ROUTE ADMINISTRATION
 
 biynlvp_admin_membres:
     path:     /admin/membres
     defaults: { _controller: biynlvpBundle:Admin:membres }
+
+# AUTHENTIFICATION
+
+biynlvp_connexion:
+    path:     /membre/connexion
+    defaults: { _controller: biynMembreBundle:Security:login }
+
+biynlvp_connexion_validation:
+    path:     /membre/connexion_validation
+
+biynlvp_deconnexion:
+    path:     /membre/deconnexion
+    
+biynlvp_inscription:
+    path:     /membre/inscription
+    defaults: { _controller: biynlvpBundle:Membre:inscription }
