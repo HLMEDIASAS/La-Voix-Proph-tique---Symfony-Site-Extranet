@@ -1,69 +1,31 @@
-Symfony Standard Edition
+La Voix Prophétique - Site Internet + Espace Membres
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Création d'un Site Internet Vitrine de l'Ecole : "La Voix Prophétique" ainsi que d'un Espace pour les Membres.
+L'Interface à été conçu et développé pour être simple et rapide à prendre en main.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
-
-What's inside?
+Fonctionnalités ?
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+L'Espace Membres permet aux inscrits de ré-écouter les cours mp3 qui ont été enregistré durant les sessions.
+Il inclut les fonctionnalités suivantes :
 
-  * An AppBundle you can use to start coding;
+  * Inscription / Connexion des Membres avec Notifications par Email;
 
-  * Twig as the only configured template engine;
+  * Affichage et lecture audio des cours par les Membres connecté
 
-  * Doctrine ORM/DBAL;
+  * Ajout des cours et notifications aux membres.
 
-  * Swiftmailer;
+Librairies ?
+--------------
 
-  * Annotations enabled for everything.
+Le Projet s'appuie sur les librairies suivantes :
 
-It comes pre-configured with the following bundles:
+  * Symfony 3 et Doctrine ORM/DBAL;
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+  * Bootstrap, Font-Awesome et Google Font;
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+  * Javascript / jQuery;
+  
+Le développement est toujours en cours.
+De nouvelles fonctionnalités seront ajoutées.
