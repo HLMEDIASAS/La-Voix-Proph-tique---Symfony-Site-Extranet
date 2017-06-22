@@ -8,6 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        # Affichage du Site Internet
         return $this->render('biynlvpBundle:Default:index.html.twig');
     }
 

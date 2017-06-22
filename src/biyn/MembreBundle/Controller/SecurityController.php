@@ -8,25 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends Controller
 {
-    public function connexionAction(Request $request, AuthenticationUtils $authUtils)
-    {
-        // Si le visiteur est déjà identifié, on le redirige vers l'accueil
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('biynlvp_espacemembres');
-        }
-    
-        // get the login error if there is one
-        $error = $authUtils->getLastAuthenticationError();
-        
-        // last username entered by the user
-        $lastUsername = $authUtils->getLastUsername();
-    
-        return $this->render('biynlvpBundle:Membre:connexion.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
-    }
-    
     public function loginAction(Request $request)
     {
         // Si le visiteur est déjà identifié, on le redirige vers l'accueil

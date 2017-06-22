@@ -7,6 +7,7 @@ use biyn\lvpBundle\Entity\Membres;
 use Symfony\Component\HttpFoundation\Request;
 use biyn\lvpBundle\Form\MembresType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use biyn\lvpBundle\Service\Email;
 
 class MembreController extends Controller
 {
@@ -33,27 +34,37 @@ class MembreController extends Controller
      */
     public function inscriptionAction(Request $request)
     {
+        
         # Création d'un Objet Membre
         $membre = new Membres();
         
         # Création du Formulaire pour l'inscription
-        $form = $this->createForm(MembresType::class);
+        $form = $this->createForm(MembresType::class, $membre);
          
          # Traitement de la Requète
          $form->handleRequest($request);
          
          # Traitement POST
          if ($form->isSubmitted() && $form->isValid()) :
-             
-             # Récupération du Membre
-             $data = $form->getData();
+
+             # Hashage du Mot de Passe
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($membre);
+            $membre->setMdp($encoder->encodePassword($membre->getPlaintextpassword(),null));
          
              # Enregistrement en BDD
              $em = $this->getDoctrine()->getManager();
-             $em->persist($data);
+             $em->persist($membre);
              $em->flush();
              
-             //$request->getSession()->getFlashBag()->add('notice', 'Membre bien ajouté.');
+             # Envoi d'un Email
+             $Email = $this->get(Email::class);
+             $Email->sendInscriptionMessage($membre);
+
+             # Envoi d'une Notification
+             $session = $request->getSession();
+             $session->getFlashBag()->add('notam', 'Merci, votre membre a bien été ajouté.');
+             
              
              # Redirection vers la Page de Gestion des Membres      
              return $this->redirectToRoute('biynlvp_admin_membres');

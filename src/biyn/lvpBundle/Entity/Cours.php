@@ -3,6 +3,7 @@
 namespace biyn\lvpBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Cours
@@ -31,21 +32,22 @@ class Cours
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var string
+     * @ORM\Column(name="mp3", type="string", length=50, nullable=true)
      *
-     * @ORM\Column(name="mp3", type="string", length=50)
+     * @Assert\NotBlank(message="Vous devez soumettre un fichier mp3.")
+     * @Assert\File(mimeTypes={ "audio/mp3", "audio/mpeg" })
      */
     private $mp3;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pdf", type="string", length=50)
+     * @ORM\Column(name="pdf", type="string", length=50, nullable=true)
      */
     private $pdf;
 
@@ -55,7 +57,15 @@ class Cours
      * @ORM\Column(name="dateajout", type="datetimetz")
      */
     private $dateajout;
-
+    
+    
+    public function __construct() {
+    
+        # Quelques valeurs par défaut
+        $this->dateajout = new \DateTime();
+        $this->pdf = null;
+        $this->description = null;
+    }
 
     /**
      * Get id

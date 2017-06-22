@@ -11,22 +11,21 @@
 
     <title>{% block title %}Minist&egrave;re la Voix Proph&eacute;tique{% endblock %}</title>
 
-    {% block stylesheets %}
-        <!-- Bootstrap Core CSS -->
-        <link href="{{ asset('bundles/biynlvp/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('bundles/biynlvp/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-        <!-- Custom Fonts -->
-        <link href="{{ asset('bundles/biynlvp/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- Custom Fonts -->
+    <link href="{{ asset('bundles/biynlvp/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-        <!-- Plugin CSS -->
-        <link href="{{ asset('bundles/biynlvp/vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link href="{{ asset('bundles/biynlvp/vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
 
-        <!-- Theme CSS -->
-        <link href="{{ asset('bundles/biynlvp/css/creative.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/biynlvp/css/lvp.css') }}" rel="stylesheet">
-    {% endblock %}
+    <!-- Theme CSS -->
+    <link href="{{ asset('bundles/biynlvp/css/creative.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/biynlvp/css/lvp.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +39,6 @@
 <body id="page-top">
     {% block body %}{% endblock %}
     
-    {% block javascripts %}
         <!-- jQuery -->
         <script src="{{ asset('bundles/biynlvp/vendor/jquery/jquery.min.js') }}"></script>
 
@@ -54,7 +52,8 @@
 
         <!-- Theme JavaScript -->
         <script src="{{ asset('bundles/biynlvp/js/creative.min.js') }}"></script>
-    {% endblock %}
+        {% block javascripts %}{% endblock %}
+    
 </body>
 
 </html>

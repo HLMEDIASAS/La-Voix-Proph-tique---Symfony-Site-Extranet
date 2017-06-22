@@ -5,10 +5,17 @@
 {% endblock %}
 
 {% block biynlvp_body %}
+
     <header>
         <div class="header-content">
             <div class="header-content-inner">
                 <!--<img src="{{ asset('bundles/biynlvp/img/logo.png') }}" alt="Logo la Voix Prophétique">-->
+                {% for message in app.session.flashbag.get('notam') %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Notification :</strong> {{message}}
+                    </div>
+                {% endfor %}
                 <h1 id="homeHeading">Gestion des Membres</h1>
                 <hr>
                 <p>
@@ -22,7 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Les Membres <em>({{ membres|length }} inscrits)</em></h2>
+                    <h2 class="section-heading">Les Membres <em>( {{ membres|length }} {% if membres|length <= 1 %} inscrit {% else %} inscrits {% endif %})</em></h2>
                     <hr class="light">
                     <table class="table">
                         <thead>

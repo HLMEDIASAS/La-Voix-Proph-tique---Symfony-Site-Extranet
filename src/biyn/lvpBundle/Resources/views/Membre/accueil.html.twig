@@ -4,11 +4,55 @@
     Espace Membres - {{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel='stylesheet' type="text/css" href="{{ asset('bundles/biynlvp/source/audioplayer/audioplayer.css') }}"/>
+    <style>
+        .the-artist {
+            color: white !important;
+            font-size: 14px !important;
+        }
+        .the-name {
+            color: white !important;
+            font-size: 16px !important;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/biynlvp/source/audioplayer/audioplayer.js') }}" type="text/javascript"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            var settings_ap = {
+                            autoplay: 'off'
+                            , design_skin: 'skin-wave'
+                            , skinwave_dynamicwaves: 'on'
+                            , skinwave_enableSpectrum: 'off'
+                            , settings_backup_type: 'full'
+                            , settings_useflashplayer: 'auto'
+                            , skinwave_spectrummultiplier: '4'
+                        };
+            
+            dzsag_init('#ag1',{
+                'transition':'fade'
+                ,'autoplay' : 'off'
+                ,'settings_ap':settings_ap
+            });
+
+        });
+    </script>
+{% endblock %}
+
 {% block biynlvp_body %}
     <header>
         <div class="header-content">
             <div class="header-content-inner">
                 <!--<img src="{{ asset('bundles/biynlvp/img/logo.png') }}" alt="Logo la Voix Prophétique">-->
+                {% for message in app.session.flashbag.get('notam') %}
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Notification :</strong> {{message}}
+                    </div>
+                {% endfor %}
                 <h1 id="homeHeading">Espace Membres</h1>
                 <h3>Bonjour {{app.user.prenom}} !</h3>
                 <hr>
@@ -26,29 +70,27 @@
     <section class="bg-primary" id="lescours">
         <div class="container">
             <div class="row">
+                
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Les Cours</h2>
+
+                        <div id="ag1" class="audiogallery" style="opacity:0; padding-top: 70px;">
+                            <div class="items">
+                                {% for cour in cours %}
+                                    <div id="apid" class="audioplayer-tobe" style="width:100%; " data-thumb="{{ asset('bundles/biynlvp/img/player/lvp.jpg') }}" data-bgimage="{{ asset('bundles/biynlvp/img/player/lvp.jpg') }}" data-videoTitle="Audio Video" data-type="normal" data-source="{{ asset('bundles/biynlvp/source/sounds/' ~ cour.mp3 ) }}">
+                                        <div class="meta-artist"><span class="the-artist">Apôtre Jérémia</span><br/><span class="the-name">La Voix Prophétique</div>
+                                        <div class="menu-description">
+                                            <div class="menu-item-thumb-con"><div class="menu-item-thumb" style="background-image: url( {{ asset('bundles/biynlvp/img/player/apotre.jpg') }} )"></div></div>
+                                            <span class="the-artist">{{cour.titre}}</span>
+                                            <span class="the-name">Session du {{cour.dateajout | date("d/m/Y")}}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
                     <hr class="light">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>N°</th>
-                                <th>Titre du Cours</th>
-                                <th>Lecteur Audio</th>
-                                <th>Résumé en PDF</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cour in cours %}
-                            <tr>
-                                <td>{{cour.id}}</td>
-                                <td>{{cour.titre}}</td>
-                                <td>{{cour.mp3}}</td>
-                                <td>{{cour.pdf}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </div>

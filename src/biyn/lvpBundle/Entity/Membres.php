@@ -63,6 +63,8 @@ class Membres implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="mdp", type="string", length=255)
      */
     private $mdp;
+    
+    private $plaintextpassword;
 
     /**
      * @var \DateTime
@@ -94,7 +96,7 @@ class Membres implements AdvancedUserInterface, \Serializable
         # Quelques valeurs par défaut
         $this->isactive = true;
         $this->dateinscription = new \DateTime();
-        $this->mdp = bin2hex(random_bytes(4));
+        $this->plaintextpassword = bin2hex(random_bytes(4));
     }
     
     /**
@@ -289,6 +291,23 @@ class Membres implements AdvancedUserInterface, \Serializable
         // TODO Auto-generated method stub
         return $this->email;
     }
+    
+    /**
+     * @param field_type $plaintextpassword
+     */
+    public function setPlaintextpassword($plaintextpassword)
+    {
+        $this->plaintextpassword = $plaintextpassword;
+    }
+
+    /**
+     * @return the $plaintextpassword
+     */
+    public function getPlaintextpassword()
+    {
+        return $this->plaintextpassword;
+    }
+
     /**
      * {@inheritDoc}
      * @see \Symfony\Component\Security\Core\User\UserInterface::eraseCredentials()
@@ -390,5 +409,7 @@ class Membres implements AdvancedUserInterface, \Serializable
         // TODO Auto-generated method stub
         return $this->isactive;
     }
+    
+    
 
 }

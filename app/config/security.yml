@@ -2,8 +2,8 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        biyn\lvpBundle\Entity\Membres: plaintext
+        Symfony\Component\Security\Core\User\User: bcrypt
+        biyn\lvpBundle\Entity\Membres: bcrypt
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

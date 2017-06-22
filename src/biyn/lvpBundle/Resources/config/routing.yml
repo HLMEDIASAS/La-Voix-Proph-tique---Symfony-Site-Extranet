@@ -14,6 +14,10 @@ biynlvp_admin_membres:
     path:     /admin/membres
     defaults: { _controller: biynlvpBundle:Admin:membres }
 
+biynlvp_admin_nouveaucour:
+    path:     /admin/nouveaucour
+    defaults: { _controller: biynlvpBundle:Admin:nouveaucour }
+
 # AUTHENTIFICATION
 
 biynlvp_connexion:
