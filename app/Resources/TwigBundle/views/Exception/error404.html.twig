@@ -1,0 +1,40 @@
+{% extends "biynlvpBundle::site.html.twig" %}
+
+{% block title %}
+    Page Introuvable - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">{{ nomdusite }}</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            {{ render(controller("biynlvpBundle:Default:menu")) }}
+            
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Hum !?</h1>
+                <hr>
+                <p>Ah, non non ! Cette page n'existe pas...</p>
+                <a href="{{ path('biynlvp_homepage') }}" class="btn btn-primary btn-xl page-scroll">Retourner vers la Page d'Accueil</a>
+            </div>
+        </div>
+    </header>
+
+    {{ include("biynlvpBundle:Default:contact.html.twig") }}
+
+{% endblock %}
