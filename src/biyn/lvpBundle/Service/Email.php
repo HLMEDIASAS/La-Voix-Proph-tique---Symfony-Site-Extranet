@@ -47,7 +47,6 @@ class Email
         $template = 'biynlvpBundle:Mail:inscription.html.twig';
         
         $from = 'lavoixprophetique@gmail.com';
-        //$to = $membre->getEmail();
         $subject = '[La Voix Prophétique] - Nouveau cour disponible';
         
         $request = $this->requestStack->getCurrentRequest();

@@ -13,4 +13,4 @@ parameters:
     mailer_encryption: ssl
     auth_mode: login
     secret: ~
-    nomdusite: La Voix Prophétique
+    nomdusite: La Voix 
