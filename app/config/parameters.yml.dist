@@ -12,5 +12,5 @@ parameters:
     mailer_port: 465
     mailer_encryption: ssl
     auth_mode: login
-    secret: ~
+    secret: ThisIsAHugeSecret
     nomdusite: La Voix 
