@@ -5,7 +5,7 @@ namespace biyn\lvpBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use biyn\lvpBundle\Entity\Membres;
 use Symfony\Component\HttpFoundation\Request;
-use biyn\lvpBundle\Form\MembresType;
+use biyn\lvpBundle\Form\Type\MembresType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use biyn\lvpBundle\Service\Email;
 

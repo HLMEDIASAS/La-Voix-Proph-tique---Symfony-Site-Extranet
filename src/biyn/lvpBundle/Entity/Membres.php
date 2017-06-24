@@ -8,7 +8,6 @@ namespace biyn\lvpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; 
-// use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -268,7 +267,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function getPassword()
     {
-        // TODO Auto-generated method stub
         return $this->mdp;
     }
 
@@ -278,7 +276,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function getSalt()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -288,7 +285,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        // TODO Auto-generated method stub
         return $this->email;
     }
     
@@ -314,7 +310,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function eraseCredentials()
     {
-        // TODO Auto-generated method stub
         
     }
     
@@ -376,7 +371,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonExpired()
     {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -386,7 +380,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonLocked()
     {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -396,7 +389,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function isCredentialsNonExpired()
     {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -406,7 +398,6 @@ class Membres implements AdvancedUserInterface, \Serializable
      */
     public function isEnabled()
     {
-        // TODO Auto-generated method stub
         return $this->isactive;
     }
     

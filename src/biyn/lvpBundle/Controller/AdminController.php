@@ -3,10 +3,9 @@
 namespace biyn\lvpBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use biyn\lvpBundle\Entity\Membres;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use biyn\lvpBundle\Form\CoursType;
+use biyn\lvpBundle\Form\Type\CoursType;
 use biyn\lvpBundle\Entity\Cours;
 use biyn\lvpBundle\Service\Email;
 

@@ -17,15 +17,15 @@
                 <li><a href="{{ path('biynlvp_admin_nouveaucour') }}">Ajouter un Cour</a></li>
                 </ul>
             </li>
-          {% endif %}
+        {% endif %}
 
-          {# Lien de Déconnexion #}
+        {# Lien de Déconnexion #}
 
-          {% if app.user %}
+        {% if app.user %}
             <li>
-               <a class="page-scroll" href="{{ path('biynlvp_deconnexion') }}">Déconnexion</a>
+            <a class="page-scroll" href="{{ path('biynlvp_deconnexion') }}">Déconnexion</a>
             </li>
-          {% endif %}
+        {% endif %}
 
     </ul>
 </div>

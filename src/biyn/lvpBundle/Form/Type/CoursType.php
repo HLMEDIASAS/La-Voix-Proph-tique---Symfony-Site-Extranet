@@ -1,6 +1,6 @@
 <?php
 
-namespace biyn\lvpBundle\Form;
+namespace biyn\lvpBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
