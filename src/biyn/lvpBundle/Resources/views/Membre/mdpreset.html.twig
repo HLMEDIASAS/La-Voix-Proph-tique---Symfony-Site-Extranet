@@ -1,0 +1,31 @@
+{% extends "biynlvpBundle::extranet.html.twig" %}
+
+{% block title %}
+    Changer mon Mot de Passe - {{ parent() }}
+{% endblock %}
+
+{% block biynlvp_body %}
+<header>
+        <div class="header-content">
+            <div class="header-content-inner">
+               <div class="row">
+                 <div class="col-xs-8 col-xs-push-2">
+                    <form method="POST" class="form-signin">
+
+                        <h2 class="form-signin-heading">Changer mon mot de passe :</h2>
+                        <p>&nbsp;</p>
+                        <p class="text-left">
+                            Vous pouvez maintenant choisir votre nouveau mot de passe.
+                        </p>
+
+                        <label for="password" class="sr-only">Nouveau mot de passe</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="*******" required autofocus>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Changer mon mot de passe</button>
+                    </form>
+                 </div>
+               </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

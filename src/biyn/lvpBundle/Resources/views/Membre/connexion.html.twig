@@ -16,7 +16,16 @@
                         <p>Nous vous invitons à vous connecter avec vos identifiants reçu par email.</p>
                         
                         {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            <div class="alert alert-danger">
+                                {#{{ error.messageKey|trans(error.messageData, 'security')  }}#}
+                                Identifiants et/ou mot de passe incorrect.
+                            </div>
+                        {% endif %}
+
+                        {% if app.request.get('msg') %}
+                            <div class="alert alert-success">
+                                {{ app.request.get('msg') | raw }}
+                            </div>
                         {% endif %}
 
                         <label for="inputEmail" class="sr-only">Adresse email</label>
@@ -26,6 +35,9 @@
                         <input type="password" id="password" name="_password" class="form-control mt-5" placeholder="*******" required>
 
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+
+                        <br><a href="{{ url('biynlvp_mdp_oublie') }}">J'ai oubli&eacute; mon mot de passe</a>
+
                     </form>
                  </div>
                </div>

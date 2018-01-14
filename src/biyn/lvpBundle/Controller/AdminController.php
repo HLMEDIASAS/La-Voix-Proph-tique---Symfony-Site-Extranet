@@ -32,6 +32,7 @@ class AdminController extends Controller
      */
     public function nouveaucourAction(Request $request)
     {
+        
         # Création d'un Nouveau Cour
         $cour = new Cours();
         

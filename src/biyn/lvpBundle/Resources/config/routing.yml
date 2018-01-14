@@ -1,35 +1,53 @@
 biynlvp_homepage:
     path:     /
     defaults: { _controller: biynlvpBundle:Default:index }
+    schemes:  [https]
     
 # ROUTE MEMBRES
 
 biynlvp_espacemembres:
     path:     /membre/
     defaults: { _controller: biynlvpBundle:Membre:accueil }
+    schemes:  [https]
 
 # ROUTE ADMINISTRATION
 
 biynlvp_admin_membres:
     path:     /admin/membres
     defaults: { _controller: biynlvpBundle:Admin:membres }
+    schemes:  [https]
 
 biynlvp_admin_nouveaucour:
     path:     /admin/nouveaucour
     defaults: { _controller: biynlvpBundle:Admin:nouveaucour }
+    schemes:  [https]
 
 # AUTHENTIFICATION
 
 biynlvp_connexion:
     path:     /membre/connexion
     defaults: { _controller: biynMembreBundle:Security:login }
+    schemes:  [https]
 
 biynlvp_connexion_validation:
     path:     /membre/connexion_validation
+    schemes:  [https]
 
 biynlvp_deconnexion:
     path:     /membre/deconnexion
+    schemes:  [https]
     
 biynlvp_inscription:
     path:     /membre/inscription
     defaults: { _controller: biynlvpBundle:Membre:inscription }
+    schemes:  [https]
+
+biynlvp_mdp_oublie:
+    path:     /membre/connexion/mot-de-passe-oublie
+    defaults: { _controller: biynlvpBundle:Membre:mdpoublie }
+    schemes:  [https]
+
+biynlvp_mdp_reset:
+        path:     /membre/connexion/mot-de-passe-changement/{token}
+        defaults: { _controller: biynlvpBundle:Membre:mdpreset }
+        schemes:  [https]

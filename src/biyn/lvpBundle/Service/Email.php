@@ -1,6 +1,7 @@
 <?php
 namespace biyn\lvpBundle\Service;
 
+use biyn\lvpBundle\Entity\Encode;
 use Symfony\Component\Templating\EngineInterface;
 use biyn\lvpBundle\Entity\Membres;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -27,7 +28,7 @@ class Email
         # Définition des Variables
         $template = 'biynlvpBundle:Mail:inscription.html.twig';
         
-        $from = 'lavoixprophetique@gmail.com';
+        $from = ['secretariat@lavoixprophetique.fr' => 'La Voix Prophétique - Secrétariat'];
         $to = $membre->getEmail();
         $subject = '[La Voix Prophétique] - Vos identifiants de connexion';
         
@@ -46,7 +47,8 @@ class Email
         # Définition des Variables
         $template = 'biynlvpBundle:Mail:inscription.html.twig';
         
-        $from = 'lavoixprophetique@gmail.com';
+        $from = ['secretariat@lavoixprophetique.fr' => 'La Voix Prophétique - Secrétariat'];
+        //$to = $membre->getEmail();
         $subject = '[La Voix Prophétique] - Nouveau cour disponible';
         
         $request = $this->requestStack->getCurrentRequest();
@@ -60,6 +62,26 @@ class Email
             # Envoi du Message
             $this->process($from, $membre->getEmail(), $subject, $body);
         endforeach;
+    }
+
+    public function sendMotDePasseOublieMessage(Membres $membre)
+    {
+        # Définition des Variables
+        $e        = new Encode;
+        $template = 'biynlvpBundle:Mail:inscription.html.twig';
+
+        $from = ['secretariat@lavoixprophetique.fr' => 'La Voix Prophétique - Secrétariat'];
+        $to = $membre->getEmail();
+        $subject = '[La Voix Prophétique] - Réinitialisez votre Mot de Passe';
+
+        $request = $this->requestStack->getCurrentRequest();
+        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+
+        $message = "Bonjour ".$membre->getPrenom().",<br /><br />Nous vous invitons &agrave; cliquer sur le bouton ci-dessous afin de finaliser le changement de votre mot de passe.<br /><br /><a href='".$this->router->generate('biynlvp_mdp_reset', ['token' => $e->encode($membre->getId())], UrlGeneratorInterface::ABSOLUTE_URL)."' style='display: inline-block; padding: 11px 30px; margin: 10px 0px 20px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;'> R&eacute;initialiser mon mot de passe </a><br /><br />A tr&egrave;s vite,<br />La Secrétaire, Esther.";
+        $body = $this->template->render($template, ['membre' => $membre, 'message' => $message, 'biynlvp_homepage' => $this->router->generate('biynlvp_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL), 'baseurl' => $baseurl]);
+
+        # Envoi du Message
+        $this->process($from, $to, $subject, $body);
     }
     
     protected function process($from, $to, $subject, $body)

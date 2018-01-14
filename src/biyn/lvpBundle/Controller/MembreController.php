@@ -2,6 +2,7 @@
 
 namespace biyn\lvpBundle\Controller;
 
+use biyn\lvpBundle\Entity\Encode;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use biyn\lvpBundle\Entity\Membres;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +24,9 @@ class MembreController extends Controller
                    ->getRepository('biynlvpBundle:Cours');
         
         # Récupération des cours
-        $cours = $coursRepository->findAll();        
-        
+//        $cours = $coursRepository->findAll();
+        $cours = $coursRepository->findBy([], ['id' => 'DESC']);
+
         # Envoi des informations à la vue
         return $this->render('biynlvpBundle:Membre:accueil.html.twig', ['cours' => $cours]);
     }
@@ -76,5 +78,94 @@ class MembreController extends Controller
                         ['form' => $form->createView()]);
         
     }
+
+    public function mdpoublieAction(Request $request) {
+
+        # Initialisation des erreurs
+        $error = '';
+        $success = '';
+
+        if($request->isMethod('POST')) :
+
+            # Vérification si l'adresse email existe...
+            $membresRepository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('biynlvpBundle:Membres');
+
+            $membre = $membresRepository->findOneByEmail($request->get('email'));
+
+            if (!$membre) {
+                # Aucun membre avec cette adresse email
+                $error = "Nous n'avons pas trouvé votre adresse email.<br>Contactez directement notre secrétaire au <strong>06 60 29 50 56</strong> <br>ou par email : <strong>lavoixprophetique@gmail.com</strong>";
+            } else {
+                # Réinitialisation du Mot de Passe.
+                # Envoi d'un Email
+                $Email = $this->get(Email::class);
+                $Email->sendMotDePasseOublieMessage($membre);
+                # Affichage d'une Confirmation
+                $success = "<h2>Merci !</h2>Vous pouvez maintenant consulter vos emails.<br>Nous vous avons fait parvenir un lien de réinitialisation.<br><strong>Pensez à vérifier vos spams.</strong>";
+            }
+
+        endif;
+
+        return $this->render('biynlvpBundle:Membre:mdpoublie.html.twig',[
+            'error' => $error,
+            'success' => $success
+        ]);
+    }
+
+    public function mdpresetAction($token, Request $request) {
+
+        if($request->isMethod('POST')) :
+
+            # Récupération du Token
+            $e = new Encode;
+            $idmembre = $e->decode($token);
+
+            # Récupération du Membre
+            $em = $this->getDoctrine()->getManager();
+            $membre = $em->getRepository(Membres::class)->findOneById($idmembre);
+
+            if (!$membre) {
+                throw $this->createNotFoundException(
+                    'Aucun utilisateur ne correspond à ce token : '.$token
+                );
+            }
+
+            # Hashage du Mot de Passe
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($membre);
+            $membre->setMdp($encoder->encodePassword($request->get('password'),null));
+
+            # Persiste en BDD
+            $em->flush();
+
+            return $this->redirect('/membre/connexion?msg=Félicitation, votre mot de passe à bien été mis à jour, vous pouvez-vous connecter.');
+
+        endif;
+
+        return $this->render('biynlvpBundle:Membre:mdpreset.html.twig');
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

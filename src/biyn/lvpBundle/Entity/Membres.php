@@ -81,7 +81,7 @@ class Membres implements AdvancedUserInterface, \Serializable
     private $isactive;
     
     /**
-     * @ORM\Column(name="salt", type="string", length=255)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
      */
     private $salt;
     
@@ -89,6 +89,11 @@ class Membres implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="roles", type="array")
      */
     private $roles;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $derniereconnexion;
 
     public function __construct() {
         
@@ -400,7 +405,21 @@ class Membres implements AdvancedUserInterface, \Serializable
     {
         return $this->isactive;
     }
-    
-    
 
+    /**
+     * @return mixed
+     */
+    public function getDerniereconnexion()
+    {
+        return $this->derniereconnexion;
+    }
+
+    /**
+     * @param string $timestamp
+     */
+    public function setDerniereconnexion($timestamp = 'now')
+    {
+        date_default_timezone_set('Europe/Paris');
+        $this->derniereconnexion = new \DateTime($timestamp);
+    }
 }

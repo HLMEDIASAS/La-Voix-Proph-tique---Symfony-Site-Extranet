@@ -39,6 +39,7 @@
                                 <th>Date inscription</th>
                                 <th>Etat</th>
                                 <th>Statut</th>
+                                <th>Dernière Connexion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +50,13 @@
                                 <td>{{membre.dateinscription|date("d/m/Y")}}</td>
                                 <td>{% if membre.isactive %} Actif {% else %} Suspendu {% endif %}</td>
                                 <td>{% if 'ROLE_ADMIN' in membre.roles %} Administrateur {% else %} Membre {% endif %}</td>
+                                <td>
+                                    {% if membre.derniereconnexion is not empty %}
+                                        <time datetime="{{ membre.derniereconnexion | date('Y-m-d H:i:s') }}"></time>
+                                    {% else %}
+                                        <span>...</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -57,4 +65,17 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" integrity="sha256-1hjUhpc44NwiNg8OwMu2QzJXhD8kcj+sJA3aCQZoUjg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/fr.js" integrity="sha256-DJpVvSniFq7HyHLFi3n3thaGrgI4XiEsDnQwyY3BnIo=" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            $('time').each(function (t, e) {
+                let time = moment($(e).attr('datetime'));
+                $(e).html('<span>' + time.from(moment()) +'</span>');
+            });
+        });
+    </script>
 {% endblock %}

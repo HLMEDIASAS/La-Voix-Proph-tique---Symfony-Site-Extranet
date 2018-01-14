@@ -16,3 +16,10 @@ services:
     
     biyn\lvpBundle\Service\Email:
         public: true
+
+    app.security.authentication_event_listener:
+            class: biyn\lvpBundle\EventListener\MemberIsConnected
+            arguments:
+                - "@doctrine.orm.entity_manager"
+            tags:
+                - { name: kernel.event_subscriber }

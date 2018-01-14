@@ -3,6 +3,7 @@
 namespace biyn\MembreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends Controller
@@ -21,7 +22,7 @@ class SecurityController extends Controller
     
         return $this->render('biynlvpBundle:Membre:connexion.html.twig', array(
             'last_username' => $authenticationUtils->getLastUsername(),
-            'error'         => $authenticationUtils->getLastAuthenticationError(),
+            'error'         => $authenticationUtils->getLastAuthenticationError()
         ));
     }
 }
